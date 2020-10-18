@@ -31,6 +31,7 @@ public class CityDAO extends GenericDAO {
                 city.setName(queryResult.getString("name"));
                 city.setLatitude(queryResult.getDouble("latitude"));
                 city.setLongitude(queryResult.getDouble("longitude"));
+                city.setTimezone(queryResult.getInt("timezone"));
                 cityList.add(city);
             }
             queryResult.close();

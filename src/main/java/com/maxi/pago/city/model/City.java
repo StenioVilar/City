@@ -10,5 +10,6 @@ public class City {
     private String name;
     private double latitude;
     private double longitude;
+    private int timezone;
 
 }
