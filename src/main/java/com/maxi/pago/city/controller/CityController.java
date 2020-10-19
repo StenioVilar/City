@@ -40,7 +40,7 @@ public class CityController {
             httpHeaders.setContentType(MediaType.APPLICATION_XML);
         }
 
-        List<CityDifference> dfferenceList = service.getDifferences(measure);
+        List<CityDifference> dfferenceList = service.getDifferences(format,measure);
 
         return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(dfferenceList);
 

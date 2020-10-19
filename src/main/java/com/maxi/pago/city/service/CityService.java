@@ -2,6 +2,7 @@ package com.maxi.pago.city.service;
 
 
 import com.maxi.pago.city.dao.CityDAO;
+import com.maxi.pago.city.error.BadRequestException;
 import com.maxi.pago.city.error.NoContentException;
 import com.maxi.pago.city.error.ResourceNotFoundException;
 import com.maxi.pago.city.error.ServiceUnavailableException;
@@ -35,11 +36,12 @@ public class CityService {
         }
     }
 
-    public List<CityDifference> getDifferences(String measure) {
+    public List<CityDifference> getDifferences(String format, String measure) {
 
         try {
             List<City> cities = cityDao.findAll();
             validateCities(cities);
+            validateParameters(format,measure);
             List<CityDifference> diffCities = generateDiff(cities, measure);
             return diffCities;
 
@@ -47,6 +49,15 @@ public class CityService {
             throw new ServiceUnavailableException(e.getMessage());
         }
 
+    }
+
+    private void validateParameters(String format, String measure) {
+        if(!format.equalsIgnoreCase("json") && !format.equalsIgnoreCase("xml")){
+            throw new BadRequestException(env.getProperty("incorret.format"));
+        }
+        if(!measure.equalsIgnoreCase("km") && !measure.equalsIgnoreCase("mi")){
+            throw new BadRequestException(env.getProperty("incorret.measure"));
+        }
     }
 
     /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/

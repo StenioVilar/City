@@ -1,10 +1,7 @@
 package com.maxi.pago.city.handler;
 
 
-import com.maxi.pago.city.error.ErrorDetails;
-import com.maxi.pago.city.error.NoContentException;
-import com.maxi.pago.city.error.ResourceNotFoundException;
-import com.maxi.pago.city.error.ServiceUnavailableException;
+import com.maxi.pago.city.error.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -45,6 +42,17 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .detail_parameter(rfnException.getMessage())
                 .build();
         return new ResponseEntity<>(rnfDetails, HttpStatus.NO_CONTENT);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<?> handleBadRequestException(BadRequestException rfnException) {
+        ErrorDetails rnfDetails = ErrorDetails.Builder
+                .newBuilder()
+                .status_code(HttpStatus.BAD_REQUEST.value())
+                .status_message(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .detail_parameter(rfnException.getMessage())
+                .build();
+        return new ResponseEntity<>(rnfDetails, HttpStatus.BAD_REQUEST);
     }
 
 }
