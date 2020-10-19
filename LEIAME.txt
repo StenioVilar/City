@@ -1,0 +1,58 @@
+Desafio MaxiPago
+
+/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+Banco de Dados MySQL Server, utilizado versão 8.0.21
+
+SCRIPT:
+
+drop database IF EXISTS MAXIPAGO;
+
+CREATE SCHEMA MAXIPAGO;
+
+USE MAXIPAGO;
+
+CREATE TABLE IF NOT EXISTS CITY (
+    ID INT NOT null COMMENT 'Unique ID for City',
+    NAME VARCHAR(50) not null COMMENT 'Name for City',
+    LATITUDE DOUBLE not null COMMENT 'Latitude for City',
+    LONGITUDE DOUBLE NOT null COMMENT 'Longitude for City',
+    TIMEZONE INT NOT null COMMENT 'Standard time zone GMT for City',
+    PRIMARY KEY (id)
+) comment='Table of cities';
+
+INSERT INTO MAXIPAGO.CITY VALUES (1,'Brasília',-15.7801,-47.9292, -3);
+INSERT INTO MAXIPAGO.CITY VALUES (2,'New York',-2.92887,-44.9357, -5);
+INSERT INTO MAXIPAGO.CITY VALUES (3,'Xangai',31.224361,121.469170, 8);
+
+
+/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+Para subir o projeto pode ser necessário alterar as configuraçoes de conexão com banco encontradas no arquivo application.properties
+Configuraçoes utilizadas: 
+
+database.url=jdbc:mysql://localhost:3306/maxipago?useTimezone=true&serverTimezone=America/Sao_Paulo
+database.user=root
+database.password=admin
+
+Documentação interativa dos serviços pode ser encontrada ao subir o projeto e acessar:
+http://localhost:8080/swagger-ui.html#/
+
+/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+Justificativa de escolha do método distance (Classe CityService):
+
+Função escolhida através do site https://dzone.com/ que é um site com conteúdo "open source"
+que tem uma area destinada apenas para Java, indo de novidades, até funções práticas como essa
+que obtive, aonde consigo comparar as latidudes, longitudes e já passando a unidade desejada, sendo:
+
+K - Kilometers ( alterado para String (km) devido necessidade do desafio )
+M - Miles
+N - Nautical Miles ( não utilizado no desafio - logo comentado)
+
+https://dzone.com/articles/distance-calculation-using-3 (URL específica da função com mais de 30k views trazendo certa confiabilidade)
+
+
+
+
+Stenio Ramalho Vilar
+
+
