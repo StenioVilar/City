@@ -27,18 +27,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class CityApplicationTests {
 
-    @Autowired
+    @Test
+    public void contextLoads() {
+    }
+
+    /*@Autowired
     private MockMvc mockMvc;
 
-    //@MockBean
-    //private CityDAO cityDAO;
+    @MockBean
+    private CityDAO cityDAO;
 
     @Test
     public void find_allcitiesNotFound_404() throws Exception {
         mockMvc.perform(get("/cities")).andExpect(status().isNotFound());
     }
 
-    /*@Test
+    @Test
     public void find_allcities_OK() throws Exception {
 
         List<City> cities = Arrays.asList(
