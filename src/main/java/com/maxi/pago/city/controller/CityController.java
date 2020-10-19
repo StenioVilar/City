@@ -29,7 +29,7 @@ public class CityController {
 
     @ApiOperation(value = "Get differences between cities")
     @GetMapping(value = "/differences", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity getDistances(@RequestParam(value="format") @ApiParam(value = "Format type (json/xml)") String format,
+    public ResponseEntity getDifferences(@RequestParam(value="format") @ApiParam(value = "Format type (json/xml)") String format,
                                           @RequestParam(value="measure") @ApiParam(value = "Measure type (km / mi)") String measure) {
 
         HttpHeaders httpHeaders = new HttpHeaders();
